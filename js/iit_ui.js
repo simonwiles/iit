@@ -60,15 +60,15 @@ var image2 = {}; // Image dragged into the right-hand position
                 var imgs = $(".ui-thumb img");
                 var count = imgs.length;
                 imgs.each(function () {
-                    var src = $(this).attr('data-lrg-url'); // note the difference between data-lrg-url and data-lrg_url.
+                    // var src = $(this).attr('data-lrg-url'); // note the difference between data-lrg-url and data-lrg_url.
                     // In my example, data-lrg-url is "public://Mona_Lisa_(copy,_Hermitage).jpg" and
                     // data-lrg_url is "http://localhost:8181/sites/default/files/styles/iit-200/public/Mona_Lisa_%28copy%2C_Hermitage%29.jpg?itok=rDQt89Lv"
-                    var that = this;
-                    $.post("agile/iit/imagederivative", {size: next, path: src}, function (data) { // Get the url of the derivative of size 'next'.
-                        $(that).attr('data-lrg_url', data); // Set it to data-lrg_url (does this mean we have a zoom ratio of 1?)
-                        //$.get(data); // Are we calling 'get' to initialize the derivatives? It takes a while. are we maybe better to initialize them as needed?
-                        if (!--count) makeDraggable();
-                    });
+                    // var that = this;
+                    // $.post("agile/iit/imagederivative", {size: next, path: src}, function (data) { // Get the url of the derivative of size 'next'.
+                    //     $(that).attr('data-lrg_url', data); // Set it to data-lrg_url (does this mean we have a zoom ratio of 1?)
+                    //     //$.get(data); // Are we calling 'get' to initialize the derivatives? It takes a while. are we maybe better to initialize them as needed?
+                    // });
+                    if (!--count) makeDraggable();
                 });
                 previousImagePrefix = next;
                 // Make the .ui-thumb stuff draggable. Good. Bizzarely, the helper seems to pop up ~150px BELOW the cursor.  This is kinda confusing.
