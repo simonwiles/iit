@@ -201,6 +201,32 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
     </div>
   </div> <!-- /#page, /#page-wrapper -->
 
+  <script type="text/html" id="twoviews_tmpl">
+    <div id="twoviews_container">
+      <p>
+        <span>Origin (click to reset):</span>
+        <input type="button" class="info_pane iit-button" id="image1_info" value="X:0 Y:0"/>
+        <input type="button" class="info_pane iit-button" id="image2_info" value="X:0 Y:0"/>
+        <input type="button" class="iit-button" name="ol_help" id="ol_help" value="Help"/>
+        <input type="button" class="iit-button" name="ol_close" id="ol_close" value="Close"/>
+      </p>
+      <div id="ol_i1" class="ol_image">
+        <a href="{{=img1src}}" class="zoom two_up">
+          <img class="two_up_image" src="{{=img1src}}" style="float: left;"/>
+          <div class="crosshair-vertical"/>
+          <div class="crosshair-horizontal"/>
+        </a>
+      </div>
+        <div id="ol_i2" class="ol_image">
+          <a href="{{=img2src}}" class="zoom two_up">
+            <img class="two_up_image" src="{{=img2src}}" style="float: left;"/>
+            <div class="crosshair-vertical"/>
+            <div class="crosshair-horizontal"/>
+          </a>
+      </div>
+    </div>
+  </script>
+
   <script type="text/javascript" src="js/js_templating.js"></script>
   <script type="text/javascript" src="js/jquery-1.7.2.js?"></script>
   <script type="text/javascript" src="js/jquery-ui.js?"></script>
