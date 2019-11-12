@@ -6,6 +6,8 @@ var image2 = {}; // Image dragged into the right-hand position
   // Drupal.behaviors.agileIITCropstuff = {
   //     attach: function (context, settings) {
 
+  var extractdetailHtml = tmpl("extractdetail_tmpl");
+
   var section1 = {}; // [Croptool] section defined on the left-hand image
   var section2 = {}; // [Croptool] section overlaid on the right-hand image.
 
@@ -288,15 +290,24 @@ var image2 = {}; // Image dragged into the right-hand position
       myOverlay.id = "overlay2"; // Create a thing called overlay2. We should refactor this to be a more descriptive name.
       $("#iit_container").append(myOverlay);
 
-      var values = $(this).serializeArray(); // Makes an array of name: value: pairs out of the form. Note, all we need are cf_img1 and cf_img2.
+      // var values = $(this).serializeArray(); // Makes an array of name: value: pairs out of the form. Note, all we need are cf_img1 and cf_img2.
       $(".img-container").hide(); // Hize the dropzones.
-      $.post("agile/iit/crop", values, function(data) {
-        // POST the form values to crop, which returns themed stuff to create the cropping workspace based on the images at cf_img1 and cf_img2.
-        $("#overlay2").append(data);
-        $("#crop_target").Jcrop({ onSelect: updateCoords }, function() {
-          jcrop_api.push(this);
-        }); // This means that on selecting a rectangle, it runs updateCoords.
-      });
+
+      //$.post("http://janbrueghel.net/agile/iit/crop", values, function(data) {
+      // POST the form values to crop, which returns themed stuff to create the cropping workspace based on the images at cf_img1 and cf_img2.
+      var img1 = $("#image1").find("img");
+      var img2 = $("#image2").find("img");
+      $("#overlay2").html(
+        extractdetailHtml({
+          img1src: img1.attr("src"),
+          img2src: img2.attr("src")
+        })
+      );
+      $("#crop_target").Jcrop({ onSelect: updateCoords }, function() {
+        jcrop_api.push(this);
+      }); // This means that on selecting a rectangle, it runs updateCoords.
+      //});
+
       $(window).resize(function() {
         if (jcrop_api.length > 0) {
           $.each(jcrop_api, function(key, api) {
@@ -392,8 +403,14 @@ var image2 = {}; // Image dragged into the right-hand position
         var values = new Array();
         values.push({ name: "image1", value: JSON.stringify(image1) });
         values.push({ name: "image2", value: JSON.stringify(image2) });
-        values.push({ name: "section1", value: JSON.stringify(serializeParameters()) });
-        values.push({ name: "section2", value: JSON.stringify(overlaidSection) });
+        values.push({
+          name: "section1",
+          value: JSON.stringify(serializeParameters())
+        });
+        values.push({
+          name: "section2",
+          value: JSON.stringify(overlaidSection)
+        });
         var myWindow = window.open("", "cmpWindow", "width=1020, height=500, scrollbars=yes, toolbar=yes");
         myWindow.focus();
 
