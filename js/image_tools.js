@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* exported crop */
 
 /**
  * @param {string} url - The source image
@@ -7,16 +7,11 @@
  */
 function crop(url, params) {
   // we return a Promise that gets resolved with our canvas element
-  return new Promise(resolve => {
+  return new Promise(function(resolve) {
     var img = new Image();
     img.onload = function() {
-      console.log(img);
       var cropMarginWidth = 50,
         canvas = document.createElement('canvas'),
-          // .attr({
-          //   width: img.width - 2 * cropMarginWidth,
-          //   height: img.height - 2 * cropMarginWidth
-          // })
         ctx = canvas.getContext("2d"),
         cropCoords = {
           topLeft: {

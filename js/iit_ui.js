@@ -1,10 +1,10 @@
+/* global crop */
+
 var sectionsCreatedThusFar = 0;
 var image1 = {}; // Image dragged into the left-hand position
 var image2 = {}; // Image dragged into the right-hand position
 
 (function($) {
-  // Drupal.behaviors.agileIITCropstuff = {
-  //     attach: function (context, settings) {
 
   var extractdetailHtml = tmpl("extractdetail_tmpl");
   var croppedimageHtml = tmpl("croppedimage_tmpl");
@@ -441,7 +441,7 @@ var image2 = {}; // Image dragged into the right-hand position
     return {
       initializeSection: function() {
         var params = serializeParameters()
-        crop(params.src, 1).then(img => {
+        crop(params.src, 1).then(function (img) {
           var wrapper= document.createElement('div');
           wrapper.innerHTML= croppedimageHtml({});
           var div = wrapper.firstElementChild;
@@ -473,5 +473,4 @@ var image2 = {}; // Image dragged into the right-hand position
       return false;
     }
   });
-  // }}
 })(jQuery);
