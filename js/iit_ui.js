@@ -7,6 +7,7 @@ var image2 = {}; // Image dragged into the right-hand position
   //     attach: function (context, settings) {
 
   var extractdetailHtml = tmpl("extractdetail_tmpl");
+  var croppedimageHtml = tmpl("croppedimage_tmpl");
 
   var section1 = {}; // [Croptool] section defined on the left-hand image
   var section2 = {}; // [Croptool] section overlaid on the right-hand image.
@@ -290,11 +291,8 @@ var image2 = {}; // Image dragged into the right-hand position
       myOverlay.id = "overlay2"; // Create a thing called overlay2. We should refactor this to be a more descriptive name.
       $("#iit_container").append(myOverlay);
 
-      // var values = $(this).serializeArray(); // Makes an array of name: value: pairs out of the form. Note, all we need are cf_img1 and cf_img2.
       $(".img-container").hide(); // Hize the dropzones.
 
-      //$.post("http://janbrueghel.net/agile/iit/crop", values, function(data) {
-      // POST the form values to crop, which returns themed stuff to create the cropping workspace based on the images at cf_img1 and cf_img2.
       var img1 = $("#image1").find("img");
       var img2 = $("#image2").find("img");
       $("#overlay2").html(
@@ -442,7 +440,14 @@ var image2 = {}; // Image dragged into the right-hand position
 
     return {
       initializeSection: function() {
-        $.post("agile/iit/croptool", serializeParameters(), postHandler);
+        var params = serializeParameters()
+        crop(params.src, 1).then(img => {
+          var wrapper= document.createElement('div');
+          wrapper.innerHTML= croppedimageHtml({});
+          var div = wrapper.firstElementChild;
+          div.querySelector('#cropped').appendChild(img);        
+          postHandler(div);
+        })
       }
     };
   };
