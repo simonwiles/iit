@@ -1,48 +1,36 @@
 /* exported crop */
 
-/**
- * @param {string} url - The source image
- * @param {number} aspectRatio - The aspect ratio
- * @return {Promise<HTMLCanvasElement>} A Promise that resolves with the resulting image as a canvas element
- */
-function crop(url, params) {
+function crop(params) {
   // we return a Promise that gets resolved with our canvas element
   return new Promise(function(resolve) {
     var img = new Image();
     img.onload = function() {
-      var cropMarginWidth = 50,
-        canvas = document.createElement('canvas'),
-        ctx = canvas.getContext("2d"),
-        cropCoords = {
-          topLeft: {
-            x: cropMarginWidth,
-            y: cropMarginWidth
-          },
-          bottomRight: {
-            x: img.width - cropMarginWidth,
-            y: img.height - cropMarginWidth
-          }
-        };
+      var canvas = document.createElement('canvas'),
+          ctx = canvas.getContext("2d");
 
-      canvas.width = img.width - 2 * cropMarginWidth;
-      canvas.height = img.height - 2 * cropMarginWidth;
+          canvas.width = (params.baseWidth * params.width_ratio);
+      canvas.height = (params.baseHeight * params.height_ratio);
+      
+      canvas.style.opacity = 0.6;
     
       ctx.drawImage(
         img,
-        cropCoords.topLeft.x,
-        cropCoords.topLeft.y,
-        cropCoords.bottomRight.x,
-        cropCoords.bottomRight.y,
-        0,
-        0,
-        img.width,
-        img.height
+        // s
+        params.xOffset_ratio * img.width, // top-left x coord relative to original image
+        params.yOffset_ratio * img.height, // top-left y coord relative to original image
+        params.width_ratio * img.width, // width relative to original image
+        params.height_ratio * img.height, // height relative to original image
+        // d
+        0, // target x
+        0, // target y
+        params.width_ratio * params.baseWidth,  // output width (original width)
+        params.height_ratio * params.baseHeight  // output height (original height)
       );
 
       resolve(canvas);
     };
 
     // start loading our image
-    img.src = url;
+    img.src = params.src;
   });
 }

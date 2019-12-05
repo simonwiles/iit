@@ -322,7 +322,7 @@ var image2 = {}; // Image dragged into the right-hand position
     }
   });
 
-  var createSection = function(xOffset_ratio, yOffset_ratio, width_ratio, height_ratio, width, src) {
+  var createSection = function(xOffset_ratio, yOffset_ratio, width_ratio, height_ratio, width, src, baseWidth, baseHeight) {
     var sectionId = ++sectionsCreatedThusFar;
     var angle = 0;
 
@@ -337,7 +337,9 @@ var image2 = {}; // Image dragged into the right-hand position
         width: width,
         src: src,
         id: sectionId,
-        rotation_deg: angle
+        rotation_deg: angle,
+        baseWidth: baseWidth,
+        baseHeight: baseHeight
       };
     };
 
@@ -440,12 +442,12 @@ var image2 = {}; // Image dragged into the right-hand position
 
     return {
       initializeSection: function() {
-        var params = serializeParameters()
-        crop(params.src, 1).then(function (img) {
+        var params = serializeParameters();
+        crop(params).then(function (img) {
           var wrapper= document.createElement('div');
           wrapper.innerHTML= croppedimageHtml({});
           var div = wrapper.firstElementChild;
-          div.querySelector('#cropped').appendChild(img);        
+          div.querySelector('.iit-results-image-wrapper').appendChild(img);        
           postHandler(div);
         })
       }
@@ -465,8 +467,9 @@ var image2 = {}; // Image dragged into the right-hand position
       var width = $("#w").val();
 
       var src = $("#cf_img1").val(); // Oddly enough, we dig back down into the original "cropform" to get this value. It's still "underneath" the crop workspace.
-
-      var newSection = createSection(xOffset_ratio, yOffset_ratio, width_ratio, height_ratio, width, src);
+      var baseWidth = $("#crop_target").width();
+      var baseHeight = $("#crop_target").height();
+      var newSection = createSection(xOffset_ratio, yOffset_ratio, width_ratio, height_ratio, width, src, baseWidth, baseHeight);
       newSection.initializeSection();
     } else {
       alert("Please select a crop region then press submit.");
