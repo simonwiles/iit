@@ -436,6 +436,11 @@ var image2 = {}; // Image dragged into the right-hand position
       $(".rotatable").rotatable({ wheelRotate: false });
       // Add event handler on info.
       $("#info-button-" + sectionId.toString()).on("click", infoHandler);
+      var canvas = $(".resizable").find("canvas");
+      var canvasWidth = canvas.width();
+      $(".resizable").on("resize", function() {
+        canvas.css("zoom", this.offsetWidth / canvasWidth);
+      });
       // Scroll down to see the new div
       $("html, body").animate({ scrollTop: $(document).height() });
     };
