@@ -437,9 +437,11 @@ var image2 = {}; // Image dragged into the right-hand position
       // Add event handler on info.
       $("#info-button-" + sectionId.toString()).on("click", infoHandler);
       var canvas = $(".resizable").find("canvas");
+      canvas[0].style.opacity = 0.6;
+      canvas[0].style.transformOrigin = "top left";
       var canvasWidth = canvas.width();
       $(".resizable").on("resize", function() {
-        canvas.css("zoom", this.offsetWidth / canvasWidth);
+        canvas[0].style.transform = "scale(" + (this.offsetWidth / canvasWidth) + ")";
       });
       // Scroll down to see the new div
       $("html, body").animate({ scrollTop: $(document).height() });

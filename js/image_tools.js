@@ -8,11 +8,9 @@ function crop(params) {
       var canvas = document.createElement('canvas'),
           ctx = canvas.getContext("2d");
 
-          canvas.width = (params.baseWidth * params.width_ratio);
+      canvas.width = (params.baseWidth * params.width_ratio);
       canvas.height = (params.baseHeight * params.height_ratio);
-      
-      canvas.style.opacity = 0.6;
-    
+         
       ctx.drawImage(
         img,
         // s
