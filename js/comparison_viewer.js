@@ -8,8 +8,7 @@ var twoviewsHtml = tmpl("twoviews_tmpl");
 var image1Top, image2Top;
 var image1Left = 0;
 function comp_view() {
-  $("#resizable-gallery-wrapper").hide();
-  $("#page-title").hide();
+  $("header").hide();
   var container_width = $("#iit_container").width();
   var myOverlay = document.createElement("div");
   myOverlay.id = "overlay2";
@@ -65,8 +64,7 @@ function close_compview() {
     .find(".zoomy")
     .remove();
   $("#overlay2").remove();
-  $("#resizable-gallery-wrapper").show();
-  $("#page-title").show();
+  $("header").show();
 }
 (function($) {
   // Drupal.behaviors.agileIITComparison = {
