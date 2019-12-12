@@ -1,10 +1,13 @@
+/* global crop */
+
 var sectionsCreatedThusFar = 0;
 var image1 = {}; // Image dragged into the left-hand position
 var image2 = {}; // Image dragged into the right-hand position
 
 (function($) {
-  // Drupal.behaviors.agileIITCropstuff = {
-  //     attach: function (context, settings) {
+
+  var extractdetailHtml = tmpl("extractdetail_tmpl");
+  var croppedimageHtml = tmpl("croppedimage_tmpl");
 
   var section1 = {}; // [Croptool] section defined on the left-hand image
   var section2 = {}; // [Croptool] section overlaid on the right-hand image.
@@ -288,15 +291,21 @@ var image2 = {}; // Image dragged into the right-hand position
       myOverlay.id = "overlay2"; // Create a thing called overlay2. We should refactor this to be a more descriptive name.
       $("#iit_container").append(myOverlay);
 
-      var values = $(this).serializeArray(); // Makes an array of name: value: pairs out of the form. Note, all we need are cf_img1 and cf_img2.
       $(".img-container").hide(); // Hize the dropzones.
-      $.post("agile/iit/crop", values, function(data) {
-        // POST the form values to crop, which returns themed stuff to create the cropping workspace based on the images at cf_img1 and cf_img2.
-        $("#overlay2").append(data);
-        $("#crop_target").Jcrop({ onSelect: updateCoords }, function() {
-          jcrop_api.push(this);
-        }); // This means that on selecting a rectangle, it runs updateCoords.
-      });
+
+      var img1 = $("#image1").find("img");
+      var img2 = $("#image2").find("img");
+      $("#overlay2").html(
+        extractdetailHtml({
+          img1src: img1.attr("src"),
+          img2src: img2.attr("src")
+        })
+      );
+      $("#crop_target").Jcrop({ onSelect: updateCoords }, function() {
+        jcrop_api.push(this);
+      }); // This means that on selecting a rectangle, it runs updateCoords.
+      //});
+
       $(window).resize(function() {
         if (jcrop_api.length > 0) {
           $.each(jcrop_api, function(key, api) {
@@ -313,7 +322,7 @@ var image2 = {}; // Image dragged into the right-hand position
     }
   });
 
-  var createSection = function(xOffset_ratio, yOffset_ratio, width_ratio, height_ratio, width, src) {
+  var createSection = function(xOffset_ratio, yOffset_ratio, width_ratio, height_ratio, width, src, baseWidth, baseHeight) {
     var sectionId = ++sectionsCreatedThusFar;
     var angle = 0;
 
@@ -328,7 +337,9 @@ var image2 = {}; // Image dragged into the right-hand position
         width: width,
         src: src,
         id: sectionId,
-        rotation_deg: angle
+        rotation_deg: angle,
+        baseWidth: baseWidth,
+        baseHeight: baseHeight
       };
     };
 
@@ -392,8 +403,14 @@ var image2 = {}; // Image dragged into the right-hand position
         var values = new Array();
         values.push({ name: "image1", value: JSON.stringify(image1) });
         values.push({ name: "image2", value: JSON.stringify(image2) });
-        values.push({ name: "section1", value: JSON.stringify(serializeParameters()) });
-        values.push({ name: "section2", value: JSON.stringify(overlaidSection) });
+        values.push({
+          name: "section1",
+          value: JSON.stringify(serializeParameters())
+        });
+        values.push({
+          name: "section2",
+          value: JSON.stringify(overlaidSection)
+        });
         var myWindow = window.open("", "cmpWindow", "width=1020, height=500, scrollbars=yes, toolbar=yes");
         myWindow.focus();
 
@@ -419,13 +436,27 @@ var image2 = {}; // Image dragged into the right-hand position
       $(".rotatable").rotatable({ wheelRotate: false });
       // Add event handler on info.
       $("#info-button-" + sectionId.toString()).on("click", infoHandler);
+      var canvas = $(".resizable").find("canvas");
+      canvas[0].style.opacity = 0.6;
+      canvas[0].style.transformOrigin = "top left";
+      var canvasWidth = canvas.width();
+      $(".resizable").on("resize", function() {
+        canvas[0].style.transform = "scale(" + (this.offsetWidth / canvasWidth) + ")";
+      });
       // Scroll down to see the new div
       $("html, body").animate({ scrollTop: $(document).height() });
     };
 
     return {
       initializeSection: function() {
-        $.post("agile/iit/croptool", serializeParameters(), postHandler);
+        var params = serializeParameters();
+        crop(params).then(function (img) {
+          var wrapper= document.createElement('div');
+          wrapper.innerHTML= croppedimageHtml({});
+          var div = wrapper.firstElementChild;
+          div.querySelector('.iit-results-image-wrapper').appendChild(img);        
+          postHandler(div);
+        })
       }
     };
   };
@@ -443,13 +474,13 @@ var image2 = {}; // Image dragged into the right-hand position
       var width = $("#w").val();
 
       var src = $("#cf_img1").val(); // Oddly enough, we dig back down into the original "cropform" to get this value. It's still "underneath" the crop workspace.
-
-      var newSection = createSection(xOffset_ratio, yOffset_ratio, width_ratio, height_ratio, width, src);
+      var baseWidth = $("#crop_target").width();
+      var baseHeight = $("#crop_target").height();
+      var newSection = createSection(xOffset_ratio, yOffset_ratio, width_ratio, height_ratio, width, src, baseWidth, baseHeight);
       newSection.initializeSection();
     } else {
       alert("Please select a crop region then press submit.");
       return false;
     }
   });
-  // }}
 })(jQuery);
