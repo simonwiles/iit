@@ -19,6 +19,44 @@
   <!-- Not sure about this one...
   <script type="text/javascript" src="http://janbrueghel.net/sites/all/modules/popup/popup.js?"></script>
   -->
+  <style>
+    .sample-images {
+      display: flex;
+    }
+
+    .sample-images div {
+      text-align: center;
+      padding-top: 1em;
+      width: 50%;
+    }
+
+    .sample-images img {
+      display: inline-block;
+      max-width: 250px;
+    }
+
+    .sample-image-title {
+      color: #cc9;
+      font-weight: bold;
+    }
+
+    #show-sample-images {
+      background: none;
+      border: none;
+      color: #cc9;
+      font-weight: bold;
+      cursor: pointer;     
+    }
+
+    #show-sample-images:focus {
+      outline: none;
+    }
+
+    header {
+      padding: 2em 1em;
+    }
+  
+  </style>
 </head>
 
 <body>
@@ -28,79 +66,34 @@
         <div id="iit-main" class="clearfix">
           <div id="iit-content" class="column">
             <div class="section iit-wrapper">
-              <a id="main-content"></a>
-              <h1 class="title" id="page-title">Image Investigation Tool</h1>
-
-              <!-- -->
-
-              <div id="resizable-gallery-wrapper">
-                <div class="resizable-gallery-scroll-content">
-                  <div class="region region-content">
-                    <div id="block-system-main"
-                      class="block block-system no-title odd first last block-count-1 block-region-content block-main">
-
-                      <div
-                        class="view view-iit-selected view-id-iit_selected view-display-id-page iit-view view-dom-id-1f4e3729ffb29da8f2ac9074fa9ea764">
-
-
-
-                        <div class="view-content">
-                          <table class="views-view-grid cols-5">
-
-                            <tbody>
-                              <tr class="row-1 row-first row-last">
-                                <td class="col-1 col-first">
-
-                                  <div class="views-field views-field-title-1"> <span class="field-content"><a
-                                        href="/object/adoration-of-the-magi-antwerp-mayer-van-den-bergh">Adoration of
-                                        the Magi (Antwerp, Mayer-van den Bergh)</a></span> </div>
-                                  <div class="views-field views-field-nothing"> <span class="field-content"> 20.7 cm x
-                                      32.0</span> </div>
-                                  <div class="views-field views-field-php-1"> <span
-                                      class="field-content iit-thumb ui-thumb clearfix"><img data-width="32"
-                                        data-height="20.7" data-date="1999" nid="2878" data-support="canvas"
-                                        data-lrg_url="http://janbrueghel.net/sites/default/files/styles/iit-800/public/objects/Adoration_of_the_Magi_%28Antwerp%2C_Mayer-van_den_Bergh%29.jpg"
-                                        typeof="foaf:Image" class="image-style-iit-200"
-                                        src="http://janbrueghel.net/sites/default/files/styles/iit-200/public/objects/Adoration_of_the_Magi_%28Antwerp%2C_Mayer-van_den_Bergh%29.jpg?itok=dLk7p13g"
-                                        alt="Adoration of the Magi (Antwerp, Mayer-van den Bergh)"
-                                        title="Adoration of the Magi (Antwerp, Mayer-van den Bergh)" /></span> </div>
-                                </td>
-                                <td class="col-2 col-last">
-
-                                  <div class="views-field views-field-title-1"> <span class="field-content"><a
-                                        href="/object/adoration-of-the-magi-vienna">Adoration of the Magi
-                                        (Vienna)</a></span> </div>
-                                  <div class="views-field views-field-nothing"> <span class="field-content"> 33.0 cm x
-                                      48.0</span> </div>
-                                  <div class="views-field views-field-php-1"> <span
-                                      class="field-content iit-thumb ui-thumb clearfix"><img data-width="48"
-                                        data-height="33" data-date="1999" nid="2883" data-support="canvas"
-                                        data-lrg_url="http://janbrueghel.net/sites/default/files/styles/iit-800/public/objects/Adoration_of_the_Magi_%28Vienna%29.jpg"
-                                        typeof="foaf:Image" class="image-style-iit-200"
-                                        src="http://janbrueghel.net/sites/default/files/styles/iit-200/public/objects/Adoration_of_the_Magi_%28Vienna%29.jpg?itok=kO2ej6Es"
-                                        alt="Adoration of the Magi (Vienna)"
-                                        title="Adoration of the Magi (Vienna)" /></span> </div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-
-
-
-
-
-
-                      </div>
-                    </div>
+              <header>
+                <h1 class="title" id="page-title">Image Investigation Tool</h1>
+                <button id="show-sample-images">Show sample images.</button>
+                <div class="sample-images" style="display: none;">
+                  <div>
+                    <span class="sample-image-title">Adoration of the Magi (Antwerp, Mayer-van den Bergh)</span>
+                    <br>
+                    20.7 cm x 32.0
+                    <br>
+                    <span class="iit-thumb">
+                      <img src="images/Adoration_of_the_Magi_(Antwerp,_Mayer-van_den_Bergh).jpg" 
+                          alt="Adoration of the Magi (Antwerp, Mayer-van den Bergh)" 
+                          title="Adoration of the Magi (Antwerp, Mayer-van den Bergh)">
+                    </span>
+                  </div>
+                  <div>
+                    <span class="sample-image-title">Adoration of the Magi (Vienna)</span>
+                    <br>
+                    33.0 cm x 48.0
+                    <br>
+                    <span class="iit-thumb">
+                      <img src="images/Adoration_of_the_Magi_(Vienna).jpg" 
+                          alt="Adoration of the Magi (Vienna)" 
+                          title="Adoration of the Magi (Vienna)">
+                    </span>             
                   </div>
                 </div>
-                <div id="resizable-gallery-handle" class="ui-resizable-handle ui-resizable-s">
-                  <div class="rszr-icon">&nbsp;</div>
-                </div>
-              </div>
-
-              <!-- -->
+              </header>
 
               <div class="iit-droppable-wrapper">
                 <div id="menu">
@@ -127,12 +120,10 @@
 
                 <div id="iit_container">
                   <div id="image1" class="img-container">
-                    <h4>Please wait for images to load.</h4>
-                    <div id="table1" z-index="500" opacity="0.1">
-                    </div>
+                    <h4>Drag image here</h4>
                   </div>
                   <div id="image2" class="img-container">
-                    <h4>Please wait for images to load.</h4>
+                    <h4>Drag image here</h4>
                   </div>
                 </div>
 
@@ -156,7 +147,7 @@
         <span>Origin (click to reset):</span>
         <input type="button" class="info_pane iit-button" id="image1_info" value="X:0 Y:0"/>
         <input type="button" class="info_pane iit-button" id="image2_info" value="X:0 Y:0"/>
-        <input type="button" class="iit-button" name="ol_help" id="ol_help" value="Help"/>
+        <!-- <input type="button" class="iit-button" name="ol_help" id="ol_help" value="Help"/> -->
         <input type="button" class="iit-button" name="ol_close" id="ol_close" value="Close"/>
       </p>
       <div id="ol_i1" class="ol_image">
@@ -185,7 +176,7 @@
           <input type="hidden" id="w" name="w" />
           <input type="hidden" id="h" name="h" />
           <input type="submit" class="iit-button" value="Extract Detail" class="btn btn-large btn-inverse" style="position:relative;float:left;margin-right:4px;" />
-          <input type="button" class="iit-button" name="cl_help" id="cl_help" value="Help"/>
+          <!-- <input type="button" class="iit-button" name="cl_help" id="cl_help" value="Help"/> -->
           <input type="button" class="iit-button" name="cl_close" id="cl_close" value="Close"/>
         </form>
       </div>
@@ -203,7 +194,7 @@
   <script type="text/html" id="croppedimage_tmpl">
     <div class="draggable imagecrop" style="z-index:1001;float:left">
       <div class="iit-results-image-wrapper resizable rotatable" style="position:relative">
-        <a href="" class="ui-icon ui-icon-info" id="info-button-1"> info </a>
+        <!-- <a href="" class="ui-icon ui-icon-info" id="info-button-1"> info </a> -->
         <a><span class="ui-icon ui-icon-close">X</span></a>
         <a class="ui-icon ui-icon-arrowstop-1-e"> Flip Y-axis </a>
       </div>
@@ -217,7 +208,6 @@
   <script type="text/javascript" src="vendor/zoomy.js?"></script>
 
   <script type="text/javascript" src="js/js_templating.js"></script>
-  <script type="text/javascript" src="js/iit-gallery-view.js?"></script>
   <script type="text/javascript" src="js/iit_ui.js?"></script>
   <script type="text/javascript" src="js/comparison_viewer.js?"></script>
   <script type="text/javascript" src="js/gridform.js?"></script>
