@@ -4,6 +4,22 @@ var sectionsCreatedThusFar = 0;
 var image1 = {}; // Image dragged into the left-hand position
 var image2 = {}; // Image dragged into the right-hand position
 
+function loadImage(imageSrc, container) {
+
+  jQuery(container).find("h4").hide();
+  jQuery(container).find("img").remove();
+  jQuery(container).append(jQuery("<img src='" + imageSrc + "'>"));
+
+  if (container.id === "image1") {
+    jQuery("#vf_img1").val(imageSrc);
+    jQuery("#cf_img1").val(imageSrc);
+  } else {
+    jQuery("#vf_img2").val(imageSrc);
+    jQuery("#cf_img2").val(imageSrc);
+  }
+
+}
+
 (function($) {
 
   var extractdetailHtml = tmpl("extractdetail_tmpl");
@@ -42,30 +58,7 @@ var image2 = {}; // Image dragged into the right-hand position
     hoverClass: "iit-ui-state-hover",
     drop: function(event, ui) {
       // ui is the object currently being dropped.
-
-      var src = ui.draggable.find("img").attr("src"); // get the url of the "big" image (which at the moment is also the half-the-viewport image), e.g. http://localhost:8181/sites/default/files/styles/iit-200/public/Mona_Lisa_%28copy%2C_Hermitage%29.jpg?itok=rDQt89Lv
-
-      $(this).find("h4").hide();
-
-      $(this)
-        .find("img")
-        .remove(); // Remove an existing image; lets you drop overtop of something already there. Good.
-
-      var newImage = "<img src='" + src + "'>"
-
-      var newImageElm = $(newImage).appendTo(this);
-
-      if (this.id === "image1") {
-        image1.src = src;
-         $("#vf_img1").val(src); // code note: val() gets/sets the value of a form element. This sets the value in the "viewform" out of data-lrg_url (after failing to change the pixel size from x00px to 800px)
-         $("#cf_img1").val(src); // ditto for the crop viewer form, only this time we maybe intended use the image fitted to half the screen width size. We use this image as the source for the extracted detail. Maybe we want a higher res source?
-      } // If you dragged into the second image drop zone
-      else {
-        image2.src = src;
-        /* CHECK THE VF STUFF */
-        $("#vf_img2").val(src); // Set the src of image 2 in the view form. (should have been the 800 version but isn't)
-        $("#cf_img2").val(src); // Set the src of image 2 in the crop form.
-      }
+      loadImage(ui.draggable.find("img").attr("src"), this) 
     }
   });
 
