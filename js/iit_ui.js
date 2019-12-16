@@ -431,16 +431,16 @@ var image2 = {}; // Image dragged into the right-hand position
 
     var postHandler = function(data) {
       $("#results").append(data);
-      $(".draggable").draggable({ containment: "window" });
-      $(".resizable").resizable({ aspectRatio: true, handles: "se" });
-      $(".rotatable").rotatable({ wheelRotate: false });
+      $(data).draggable({ containment: "window" });
+      $(data).find(".resizable").resizable({ aspectRatio: true, handles: "se" });
+      $(data).find(".rotatable").rotatable({ wheelRotate: false });
       // Add event handler on info.
-      $("#info-button-" + sectionId.toString()).on("click", infoHandler);
-      var canvas = $(".resizable").find("canvas");
+      $(data).find("#info-button-" + sectionId.toString()).on("click", infoHandler);
+      var canvas = $(data).find(".resizable").find("canvas");
       canvas[0].style.opacity = 0.6;
       canvas[0].style.transformOrigin = "top left";
       var canvasWidth = canvas.width();
-      $(".resizable").on("resize", function() {
+      $(data).find(".resizable").on("resize", function() {
         canvas[0].style.transform = "scale(" + (this.offsetWidth / canvasWidth) + ")";
       });
       // Scroll down to see the new div
