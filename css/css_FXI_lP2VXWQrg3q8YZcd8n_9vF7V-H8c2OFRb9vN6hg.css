@@ -2322,3 +2322,42 @@ body .ui-tooltip {
   filter: Alpha(Opacity=30);
   border-radius: 8px;
 }
+
+
+/**************/
+
+.sample-images {
+  display: flex;
+}
+
+.sample-images div {
+  text-align: center;
+  padding-top: 1em;
+  width: 50%;
+}
+
+.sample-images img {
+  display: inline-block;
+  max-width: 250px;
+}
+
+.sample-image-title {
+  color: #cc9;
+  font-weight: bold;
+}
+
+#show-sample-images {
+  background: none;
+  border: none;
+  color: #cc9;
+  font-weight: bold;
+  cursor: pointer;     
+}
+
+#show-sample-images:focus {
+  outline: none;
+}
+
+header {
+  padding: 2em 1em;
+}
