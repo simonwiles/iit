@@ -37,27 +37,6 @@ function comp_view() {
   });
   // ! reading these should be easy, right?
   dims = { image1_width: 1200, image1_height: 761, image2_width: 1200, image2_height: 823 };
-  //   $.ajax({
-  //     url: "agile/iit/image_dimensions",
-  //     type: "POST",
-  //     data: {
-  //       img1: $("#ol_i1")
-  //         .find("img")
-  //         .attr("src"),
-  //       img2: $("#ol_i2")
-  //         .find("img")
-  //         .attr("src")
-  //     },
-  //     async: false,
-  //     success: function(results, status, xhr) {
-  //       results = JSON.parse(results);
-  //       dims = results;
-  //     },
-  //     error: function(data, status, xhd) {
-  //       console.log("The function execute_callback has failed");
-  //     }
-  //   });
-  //  });
 }
 function close_compview() {
   $(".zoom")
