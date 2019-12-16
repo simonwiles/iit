@@ -310,8 +310,6 @@ var image2 = {}; // Image dragged into the right-hand position
       $(data).find(".resizable").on("resize", function() {
         canvas[0].style.transform = "scale(" + (this.offsetWidth / canvasWidth) + ")";
       });
-      // Scroll down to see the new div
-      $("html, body").animate({ scrollTop: $(document).height() });
     };
 
     return {
