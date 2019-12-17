@@ -5,98 +5,72 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Image Tool | Brueghel Family: Jan Brueghel the Elder</title>
-  <link type="text/css" rel="stylesheet"
-    href="css/css_DqUL4woRh4vicDroqQJr4isDs3ZA5gooErxvzUSGR9s.css"
-    media="all" />
-  <link type="text/css" rel="stylesheet"
-    href="css/css_FXI_lP2VXWQrg3q8YZcd8n_9vF7V-H8c2OFRb9vN6hg.css"
-    media="all" />
-  <link type="text/css" rel="stylesheet"
-    href="css/css_fUylCQzJOfUT7kurIgViIn4qoVO31lHpuiY6bCBtF1U.css"
-    media="all" />
+  <link type="text/css" rel="stylesheet" href="css/css_FXI_lP2VXWQrg3q8YZcd8n_9vF7V-H8c2OFRb9vN6hg.css" media="all" />
+  <link type="text/css" rel="stylesheet" href="css/css_fUylCQzJOfUT7kurIgViIn4qoVO31lHpuiY6bCBtF1U.css" media="all" />
 </head>
 
 <body>
-  <div id="page-wrapper">
-    <div id="page">
-      <div id="iit-main-wrapper" class="clearfix">
-        <div id="iit-main" class="clearfix">
-          <div id="iit-content" class="column">
-            <div class="section iit-wrapper">
-              <header>
-                <h1 class="title" id="page-title">Image Investigation Tool</h1>
-                <button id="show-sample-images">Show sample images.</button>
-                <div class="sample-images" style="display: none;">
-                  <div>
-                    <span class="sample-image-title">Adoration of the Magi (Antwerp, Mayer-van den Bergh)</span>
-                    <br>
-                    20.7 cm x 32.0
-                    <br>
-                    <span class="iit-thumb">
-                      <img src="images/Adoration_of_the_Magi_(Antwerp,_Mayer-van_den_Bergh).jpg" 
-                          alt="Adoration of the Magi (Antwerp, Mayer-van den Bergh)" 
-                          title="Adoration of the Magi (Antwerp, Mayer-van den Bergh)">
-                    </span>
-                  </div>
-                  <div>
-                    <span class="sample-image-title">Adoration of the Magi (Vienna)</span>
-                    <br>
-                    33.0 cm x 48.0
-                    <br>
-                    <span class="iit-thumb">
-                      <img src="images/Adoration_of_the_Magi_(Vienna).jpg" 
-                          alt="Adoration of the Magi (Vienna)" 
-                          title="Adoration of the Magi (Vienna)">
-                    </span>             
-                  </div>
-                </div>
-              </header>
-
-              <div class="iit-droppable-wrapper">
-                <div id="menu">
-
-                  <form id="viewform" method="post" class='inline'>
-                    <input type="hidden" id="vf_img1" name="vf_img1" />
-                    <input type="hidden" id="vf_img2" name="vf_img2" />
-                    <input type="submit" value="Comparison Viewer" class="agile_btn btn btn-inverse" />
-                  </form>
-
-                  <form id="cropform" method="post" class='inline'>
-                    <input type="hidden" id="cf_img1" name="cf_img1" />
-                    <input type="hidden" id="cf_img2" name="cf_img2" />
-                    <input type="submit" value="Extract Detail" class="agile_btn btn btn-large btn-inverse" />
-                  </form>
-
-                  <form id="gridform" method="post" class='inline'>
-                    <input type="submit" value="Show/Hide Grid" class="agile_btn btn btn-large btn-inverse" />
-                  </form>
-                  <form id="view_reset" method="post" class='inline'>
-                    <input type="submit" value="Reset" class="agile_btn btn btn-large btn-inverse" />
-                  </form>
-                </div>
-
-                <div id="iit_container">
-                  <div id="image1" class="img-container">
-                    <h4>Drag image here</h4>
-                  </div>
-                  <div id="image2" class="img-container">
-                    <h4>Drag image here</h4>
-                  </div>
-                </div>
-
-
-              </div>
-
-            </div>
-          </div> <!-- /.section, /#content -->
-
-
-        </div>
-      </div> <!-- /#main, /#main-wrapper -->
-
-
+  <header>
+    <h1 class="title" id="page-title">Image Investigation Tool</h1>
+    <button id="show-sample-images">Show sample images.</button>
+    <div class="sample-images" style="display: none;">
+      <div>
+        <span class="sample-image-title">Adoration of the Magi (Antwerp, Mayer-van den Bergh)</span>
+        <br>
+        20.7 cm x 32.0
+        <br>
+        <span class="iit-thumb">
+          <img src="images/Adoration_of_the_Magi_(Antwerp,_Mayer-van_den_Bergh).jpg"
+            alt="Adoration of the Magi (Antwerp, Mayer-van den Bergh)"
+            title="Adoration of the Magi (Antwerp, Mayer-van den Bergh)">
+        </span>
+      </div>
+      <div>
+        <span class="sample-image-title">Adoration of the Magi (Vienna)</span>
+        <br>
+        33.0 cm x 48.0
+        <br>
+        <span class="iit-thumb">
+          <img src="images/Adoration_of_the_Magi_(Vienna).jpg" alt="Adoration of the Magi (Vienna)"
+            title="Adoration of the Magi (Vienna)">
+        </span>
+      </div>
     </div>
-  </div> <!-- /#page, /#page-wrapper -->
+  </header>
+
+  <div class="iit-droppable-wrapper">
+    <div id="menu">
+
+      <form id="viewform" method="post" class='inline'>
+        <input type="hidden" id="vf_img1" name="vf_img1" />
+        <input type="hidden" id="vf_img2" name="vf_img2" />
+        <input type="submit" value="Comparison Viewer" class="agile_btn btn btn-inverse" />
+      </form>
+
+      <form id="cropform" method="post" class='inline'>
+        <input type="hidden" id="cf_img1" name="cf_img1" />
+        <input type="hidden" id="cf_img2" name="cf_img2" />
+        <input type="submit" value="Extract Detail" class="agile_btn btn btn-large btn-inverse" />
+      </form>
+
+      <form id="gridform" method="post" class='inline'>
+        <input type="submit" value="Show/Hide Grid" class="agile_btn btn btn-large btn-inverse" />
+      </form>
+      <form id="view_reset" method="post" class='inline'>
+        <input type="submit" value="Reset" class="agile_btn btn btn-large btn-inverse" />
+      </form>
+    </div>
+
+    <div id="iit_container">
+      <div id="image1" class="img-container">
+        <h4>Drag image here</h4>
+      </div>
+      <div id="image2" class="img-container">
+        <h4>Drag image here</h4>
+      </div>
+    </div>
+  </div>
+
 
   <script type="text/html" id="twoviews_tmpl">
     <div id="twoviews_container">
