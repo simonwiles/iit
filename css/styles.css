@@ -229,6 +229,7 @@ body {
 #results .ui-icon-arrowstop-1-e {
   position: absolute;
   bottom: -16px;
+  cursor: pointer;
 }
 
 #results .ui-icon-gripsmall-diagonal-se {

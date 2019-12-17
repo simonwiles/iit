@@ -98,13 +98,6 @@ function loadImage(imageSrc, container) {
         .fadeOut(300, function() {
           $(this).remove();
         });
-    } else if ($target.is(".ui-icon-arrowstop-1-e")) {
-      // flip arrow handler
-      var myid2 = $target
-        .parent()
-        .find("img")
-        .attr("id"); // needed because the id is arbitrary and we can have multiple details.
-      $("#" + myid2).toggleClass("flip");
     }
 
     return false;
@@ -296,12 +289,15 @@ function loadImage(imageSrc, container) {
       $(data).find(".rotatable").rotatable({ wheelRotate: false });
       // Add event handler on info.
       $(data).find("#info-button-" + sectionId.toString()).on("click", infoHandler);
-      var canvas = $(data).find(".resizable").find("canvas");
+      var canvas = $(data).find("canvas");
       canvas[0].style.opacity = 0.6;
       canvas[0].style.transformOrigin = "top left";
       var canvasWidth = canvas.width();
       $(data).find(".resizable").on("resize", function() {
         canvas[0].style.transform = "scale(" + (this.offsetWidth / canvasWidth) + ")";
+      });
+      $(data).find(".flipper").on("click", function() {
+        canvas.parent().toggleClass("flip");
       });
     };
 
@@ -312,7 +308,7 @@ function loadImage(imageSrc, container) {
           var wrapper= document.createElement('div');
           wrapper.innerHTML= croppedimageHtml({});
           var div = wrapper.firstElementChild;
-          div.querySelector('.iit-results-image-wrapper').appendChild(img);        
+          div.querySelector('.flip-container').appendChild(img);        
           postHandler(div);
         })
       }
