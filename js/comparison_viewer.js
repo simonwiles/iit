@@ -35,8 +35,12 @@ function comp_view() {
     round: false,
     border: "6px solid #fff"
   });
-  // ! reading these should be easy, right?
-  dims = { image1_width: 1200, image1_height: 761, image2_width: 1200, image2_height: 823 };
+  dims = {
+    image1_width: img1[0].naturalWidth,
+    image1_height: img1[0].naturalHeight,
+    image2_width: img2[0].naturalWidth,
+    image2_height: img2[0].naturalHeight
+  };
 }
 function close_compview() {
   $(".zoom")
