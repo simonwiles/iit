@@ -1,7 +1,5 @@
 (function($) {
   "use strict";
-  // Drupal.behaviors.agileIITGrid = {
-  //     attach: function (context, settings) {
   $("#gridform").submit(function(e) {
     e.preventDefault();
     var tmp1 = $("#vf_img1").val();
@@ -66,6 +64,4 @@
       $("#img_overlay2").css("height", img2h);
     }
   });
-  //     }
-  // };
 })(jQuery);

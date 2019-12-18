@@ -5,12 +5,12 @@ function crop(params) {
   return new Promise(function(resolve) {
     var img = new Image();
     img.onload = function() {
-      var canvas = document.createElement('canvas'),
-          ctx = canvas.getContext("2d");
+      var canvas = document.createElement("canvas"),
+        ctx = canvas.getContext("2d");
 
-      canvas.width = (params.baseWidth * params.width_ratio);
-      canvas.height = (params.baseHeight * params.height_ratio);
-         
+      canvas.width = params.baseWidth * params.width_ratio;
+      canvas.height = params.baseHeight * params.height_ratio;
+
       ctx.drawImage(
         img,
         // s
@@ -21,8 +21,8 @@ function crop(params) {
         // d
         0, // target x
         0, // target y
-        params.width_ratio * params.baseWidth,  // output width (original width)
-        params.height_ratio * params.baseHeight  // output height (original height)
+        params.width_ratio * params.baseWidth, // output width (original width)
+        params.height_ratio * params.baseHeight // output height (original height)
       );
 
       resolve(canvas);

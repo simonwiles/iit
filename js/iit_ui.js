@@ -5,9 +5,12 @@ var image1 = {}; // Image dragged into the left-hand position
 var image2 = {}; // Image dragged into the right-hand position
 
 function loadImage(imageSrc, container) {
-
-  jQuery(container).find("h4").hide();
-  jQuery(container).find("img").remove();
+  jQuery(container)
+    .find("h4")
+    .hide();
+  jQuery(container)
+    .find("img")
+    .remove();
   jQuery(container).append(jQuery("<img src='" + imageSrc + "'>"));
 
   if (container.id === "image1") {
@@ -17,11 +20,9 @@ function loadImage(imageSrc, container) {
     jQuery("#vf_img2").val(imageSrc);
     jQuery("#cf_img2").val(imageSrc);
   }
-
 }
 
 (function($) {
-
   var extractdetailHtml = tmpl("extractdetail_tmpl");
   var croppedimageHtml = tmpl("croppedimage_tmpl");
 
@@ -30,7 +31,7 @@ function loadImage(imageSrc, container) {
 
   var imageSize, imageSizePrefix, screenRatio, previousImagePrefix;
 
-  $("#show-sample-images").on("click", function () {
+  $("#show-sample-images").on("click", function() {
     $(".sample-images").toggle();
   });
 
@@ -58,7 +59,7 @@ function loadImage(imageSrc, container) {
     hoverClass: "iit-ui-state-hover",
     drop: function(event, ui) {
       // ui is the object currently being dropped.
-      loadImage(ui.draggable.find("img").attr("src"), this) 
+      loadImage(ui.draggable.find("img").attr("src"), this);
     }
   });
 
@@ -175,7 +176,16 @@ function loadImage(imageSrc, container) {
     }
   });
 
-  var createSection = function(xOffset_ratio, yOffset_ratio, width_ratio, height_ratio, width, src, baseWidth, baseHeight) {
+  var createSection = function(
+    xOffset_ratio,
+    yOffset_ratio,
+    width_ratio,
+    height_ratio,
+    width,
+    src,
+    baseWidth,
+    baseHeight
+  ) {
     var sectionId = ++sectionsCreatedThusFar;
     var angle = 0;
 
@@ -285,32 +295,42 @@ function loadImage(imageSrc, container) {
     var postHandler = function(data) {
       $("#results").append(data);
       $(data).draggable({ containment: "window" });
-      $(data).find(".resizable").resizable({ aspectRatio: true, handles: "se" });
-      $(data).find(".rotatable").rotatable({ wheelRotate: false });
+      $(data)
+        .find(".resizable")
+        .resizable({ aspectRatio: true, handles: "se" });
+      $(data)
+        .find(".rotatable")
+        .rotatable({ wheelRotate: false });
       // Add event handler on info.
-      $(data).find("#info-button-" + sectionId.toString()).on("click", infoHandler);
+      $(data)
+        .find("#info-button-" + sectionId.toString())
+        .on("click", infoHandler);
       var canvas = $(data).find("canvas");
       canvas[0].style.opacity = 0.6;
       canvas[0].style.transformOrigin = "top left";
       var canvasWidth = canvas.width();
-      $(data).find(".resizable").on("resize", function() {
-        canvas[0].style.transform = "scale(" + (this.offsetWidth / canvasWidth) + ")";
-      });
-      $(data).find(".flipper").on("click", function() {
-        canvas.parent().toggleClass("flip");
-      });
+      $(data)
+        .find(".resizable")
+        .on("resize", function() {
+          canvas[0].style.transform = "scale(" + this.offsetWidth / canvasWidth + ")";
+        });
+      $(data)
+        .find(".flipper")
+        .on("click", function() {
+          canvas.parent().toggleClass("flip");
+        });
     };
 
     return {
       initializeSection: function() {
         var params = serializeParameters();
-        crop(params).then(function (img) {
-          var wrapper= document.createElement('div');
-          wrapper.innerHTML= croppedimageHtml({});
+        crop(params).then(function(img) {
+          var wrapper = document.createElement("div");
+          wrapper.innerHTML = croppedimageHtml({});
           var div = wrapper.firstElementChild;
-          div.querySelector('.flip-container').appendChild(img);        
+          div.querySelector(".flip-container").appendChild(img);
           postHandler(div);
-        })
+        });
       }
     };
   };
@@ -330,7 +350,16 @@ function loadImage(imageSrc, container) {
       var src = $("#cf_img1").val(); // Oddly enough, we dig back down into the original "cropform" to get this value. It's still "underneath" the crop workspace.
       var baseWidth = $("#crop_target").width();
       var baseHeight = $("#crop_target").height();
-      var newSection = createSection(xOffset_ratio, yOffset_ratio, width_ratio, height_ratio, width, src, baseWidth, baseHeight);
+      var newSection = createSection(
+        xOffset_ratio,
+        yOffset_ratio,
+        width_ratio,
+        height_ratio,
+        width,
+        src,
+        baseWidth,
+        baseHeight
+      );
       newSection.initializeSection();
     } else {
       alert("Please select a crop region then press submit.");

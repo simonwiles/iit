@@ -1,7 +1,6 @@
 /* global loadImage */
 
 (function() {
-
   var dropZones = document.getElementsByClassName("img-container");
 
   [].forEach.call(dropZones, function(dropZone) {
@@ -16,12 +15,12 @@
       dropEvent.preventDefault();
       var files = dropEvent.dataTransfer.files;
 
-      for (var i=0, file; file=files[i]; i++) {
+      for (var i = 0, file; (file = files[i]); i++) {
         if (file.type.match(/image.*/)) {
           var reader = new FileReader();
           reader.onload = function(readerOnloadEvent) {
             loadImage(readerOnloadEvent.target.result, dropZone);
-          }
+          };
           reader.readAsDataURL(file);
         }
       }
